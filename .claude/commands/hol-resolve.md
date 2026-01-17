@@ -39,11 +39,17 @@ When this command is invoked:
 
 3. **Display agent details:**
    ```typescript
-   console.log('Name:', agent.name);
-   console.log('Description:', agent.description);
-   console.log('Protocols:', agent.protocols);
-   console.log('Capabilities:', agent.capabilities);
-   console.log('Endpoint:', agent.endpoint);
+   import { Logger } from '@hashgraphonline/standards-sdk';
+   
+   const logger = new Logger({ module: 'AgentResolver', level: 'info' });
+   
+   logger.info('Agent resolved', {
+     name: agent.name,
+     description: agent.description,
+     protocols: agent.protocols,
+     capabilities: agent.capabilities,
+     endpoint: agent.endpoint,
+   });
    ```
 
 ## Response Structure

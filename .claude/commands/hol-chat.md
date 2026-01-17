@@ -46,18 +46,22 @@ When this command is invoked:
 
 3. **Send message:**
    ```typescript
-   const response = await conversation.sendMessage({
-     content: message,
+   import { Logger } from '@hashgraphonline/standards-sdk';
+   
+   const logger = new Logger({ module: 'AgentChat', level: 'info' });
+   
+   const response = await conversation.send({
+     plaintext: message,
    });
    
-   console.log('Agent:', response.content);
+   logger.info('Agent response received', { sessionId: conversation.sessionId });
    ```
 
 4. **Continue conversation:**
    ```typescript
    // The conversation handle can be reused for follow-up messages
-   const followUp = await conversation.sendMessage({
-     content: 'Tell me more',
+   const followUp = await conversation.send({
+     plaintext: 'Tell me more',
    });
    ```
 

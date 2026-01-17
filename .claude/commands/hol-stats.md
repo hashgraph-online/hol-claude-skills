@@ -42,16 +42,22 @@ When this command is invoked:
 
 2. **For overview stats:**
    ```typescript
+   import { Logger } from '@hashgraphonline/standards-sdk';
+   
+   const logger = new Logger({ module: 'RegistryStats', level: 'info' });
+   
    const stats = await client.stats();
-   console.log('Total Agents:', stats.totalAgents);
-   console.log('Total Registries:', stats.totalRegistries);
+   logger.info('Registry stats', { 
+     totalAgents: stats.totalAgents, 
+     totalRegistries: stats.totalRegistries 
+   });
    ```
 
 3. **For registries list:**
    ```typescript
    const registries = await client.registries();
    registries.forEach(r => {
-     console.log(`${r.name}: ${r.description}`);
+     logger.info('Registry', { name: r.name, description: r.description });
    });
    ```
 
@@ -59,7 +65,7 @@ When this command is invoked:
    ```typescript
    const protocols = await client.listProtocols();
    protocols.forEach(p => {
-     console.log(`${p.name}: ${p.description}`);
+     logger.info('Protocol', { name: p.name, description: p.description });
    });
    ```
 
@@ -67,7 +73,7 @@ When this command is invoked:
    ```typescript
    const popular = await client.popularSearches();
    popular.terms.forEach(term => {
-     console.log(`${term.query}: ${term.count} searches`);
+     logger.info('Popular term', { query: term.query, count: term.count });
    });
    ```
 
